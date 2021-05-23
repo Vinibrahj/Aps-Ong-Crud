@@ -14,61 +14,68 @@
             <th>Sede</th>
             <th>Idade</th>
             <th>Salario</th>
+            <th></th>
         </tr>
     </thead>
 </table>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
 
 
 @section scripts{
-        <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-replace-svg="nest"></script>
-        <script>
-            var Popup, dataTable;
-            $(document).ready(function () { // Função ajax pra popular a tabela quando a página abrir
-               dataTable =  $("#FuncTable").DataTable({
-                    "ajax": {
-                        "url": "/Funcionario/GetData",
-                        "type": "GET",
-                        "datatype": "json"
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-replace-svg="nest"></script>
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () { // Função ajax pra popular a tabela quando a página abrir
+            dataTable = $("#FuncTable").DataTable({
+                "ajax": {
+                    "url": "/Funcionario/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Nome" },
+                    { "data": "Cargo" },
+                    { "data": "Sede" },
+                    { "data": "Idade" },
+                    { "data": "Salario" },
+                    {"data":"FuncID" , "render" : function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopUpForm('@Url.Action("AddOrEdit","Funcionario")/" + data + "')><i class='fas fa-edit'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fas fa-trash'></i> Delete</a>";
                     },
-                    "columns": [
-                        { "data": "Nome" },
-                        { "data": "Cargo" },
-                        { "data": "Sede" },
-                        { "data": "Idade" },
-                        { "data": "Salario" }
-                    ],
-                    "language": {
-
-                        "emptyTable" : "Não há dados disponíveis."
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"165px"
                     }
-                });
+                ],
+                "language": {
+                    "emptyTable": "Não há dados disponíveis."
+                }
             });
-
-            function PopUpForm(url) {
-                var formDiv = $('<div/>');
-                $.get(url)
-                    .done(function (response) {
-                        formDiv.html(response);
-
-                        Popup = formDiv.dialog({
-                            autoOpen: true,
-                            resizable: false,
-                            title: 'Preencha os dados do funcionário',
-                            height: 700,
-                            width: 700,
-                            close: function () {
-                                Popup.dialog('destroy').remove();
-                            }
-                        });
+        });
+        function PopUpForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Preencha os dados do funcionário',
+                        Urleight: 700,
+                        width: 700,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
                     });
-            }
-
-            function SubmitForm(form) {
+                });
+        }
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
                 $.ajax({
                     type: "POST",
                     url: form.action,
@@ -77,11 +84,37 @@
                         if (data.success) {
                             Popup.dialog('close');
                             dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
                         }
                     }
                 });
-                return false;
             }
-        </script>
-    }
+            return false;
+        }
+
+        function Delete(id) {
+            if (confirm('Tem certe que quer deletar o registro?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "Funcionario")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+}
 

@@ -11,11 +11,14 @@ namespace OngCrud.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Funcionario
     {
         public int FuncID { get; set; }
+        [Required(ErrorMessage ="O campo é obrigatório!")]
         public string Nome { get; set; }
+        [Required(ErrorMessage = "O campo é obrigatório!")]
         public string Cargo { get; set; }
         public string Sede { get; set; }
         public Nullable<int> Idade { get; set; }
