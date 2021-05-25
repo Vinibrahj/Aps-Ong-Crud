@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AdoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cursos">
+          <Key>
+            <PropertyRef Name="CursoId" />
+          </Key>
+          <Property Name="CursoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeCurso" Type="nvarchar" MaxLength="100" />
+          <Property Name="Professor" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Funcionarios">
           <Key>
             <PropertyRef Name="FuncID" />
@@ -17,8 +26,9 @@
           <Property Name="Salario" Type="int" />
         </EntityType>
         <EntityContainer Name="AdoModelStoreContainer">
+          <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Funcionarios" EntityType="Self.Funcionarios" Schema="dbo" store:Type="Tables" />
-        </EntityContainer>
+          </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -29,14 +39,24 @@
           </Key>
           <Property Name="FuncID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cargo" Type="String" />
+          <Property Name="Cargo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Sede" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Idade" Type="Int32" />
           <Property Name="Salario" Type="Int32" />
         </EntityType>
         <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Funcionarios" EntityType="Self.Funcionario" />
+          <EntitySet Name="Cursos" EntityType="AdoModel.Curso" />
         </EntityContainer>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="CursoId" />
+          </Key>
+          <Property Name="CursoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeCurso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Professor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52,6 +72,16 @@
                 <ScalarProperty Name="Sede" ColumnName="Sede" />
                 <ScalarProperty Name="Idade" ColumnName="Idade" />
                 <ScalarProperty Name="Salario" ColumnName="Salario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cursos">
+            <EntityTypeMapping TypeName="AdoModel.Curso">
+              <MappingFragment StoreEntitySet="Cursos">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="NomeCurso" ColumnName="NomeCurso" />
+                <ScalarProperty Name="CursoId" ColumnName="CursoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

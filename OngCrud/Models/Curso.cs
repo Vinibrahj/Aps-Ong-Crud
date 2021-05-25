@@ -12,13 +12,11 @@ namespace OngCrud.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Funcionario
+    public partial class Curso
     {
-        public int FuncID { get; set; }
-        public string Nome { get; set; }
-        public string Cargo { get; set; }
-        public string Sede { get; set; }
-        public Nullable<int> Idade { get; set; }
-        public Nullable<int> Salario { get; set; }
+        public int CursoId { get; set; }
+        public string NomeCurso { get; set; }
+        public string Professor { get; set; }
+        public string Status { get; set; }
     }
 }

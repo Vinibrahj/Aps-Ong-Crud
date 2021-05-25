@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AdoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cursos">
+    <Key>
+      <PropertyRef Name="CursoId" />
+    </Key>
+    <Property Name="CursoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeCurso" Type="nvarchar" MaxLength="100" />
+    <Property Name="Professor" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Funcionarios">
     <Key>
       <PropertyRef Name="FuncID" />
@@ -12,6 +21,7 @@
     <Property Name="Salario" Type="int" />
   </EntityType>
   <EntityContainer Name="AdoModelStoreContainer">
+    <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Funcionarios" EntityType="Self.Funcionarios" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -26,5 +26,6 @@ namespace OngCrud.Models
         }
     
         public virtual DbSet<Funcionario> Funcionarios { get; set; }
+        public virtual DbSet<Curso> Cursos { get; set; }
     }
 }

@@ -1,93 +1,10 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu dropdown</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-family: Arial;
-            font-size: 15px;
-            list-style: none;
-            text-decoration: none;
-            /*box-sizing: border-box;*/
-        }
-
-        :root {
-            --cor-fundo: rgb(34, 41, 37);
-            --cor-hover: rgb(118, 180, 145);
-            --cor-primaria: rgb(231, 241, 236);
-        }
-
-        .header {
-            width: 2000px;
-            height: 120px;
-            margin: auto;
-            background: linear-gradient(120deg, #48e950, #00c2c8);
-        }
-
-        .dp-menu ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            margin-top: 0;
-        }
-
-        .dp-menu ul {
-            background-color: var(--cor-fundo);
-            margin: 0;
-            padding: 0;
-            flex-basis: auto;
-        }
-
-            .dp-menu ul li {
-                display: inline;
-                position: relative;
-            }
-
-                .dp-menu ul li a {
-                    color: var(--cor-primaria);
-                    font-family: Arial;
-                    display: inline-block;
-                    transition: background .3s;
-                    width: 90px;
-                    padding: 14px 20px;
-                    align-items: center;
-                    flex-direction: column;
-                }
-
-                    .dp-menu ul li a:hover {
-                        background-color: var(--cor-hover);
-                    }
-
-            /*sub menu*/
-            .dp-menu ul ul {
-                display: none;
-                left: 0;
-                position: absolute;
-            }
-
-            .dp-menu ul li:hover ul {
-                display: block;
-            }
-
-            .dp-menu ul ul {
-                width: 130px
-            }
-
-                .dp-menu ul ul li a {
-                    display: block;
-                }
-
-    </style>
+    <link rel="stylesheet" href="~/Content/stylemenu.css">
 </head>
 
 <body>
@@ -98,7 +15,7 @@
             <li>
                 <a href="#" style="align-items: center;">Aluno</a>
                 <ul class="teste">
-                    <li><a href="#">Cursos</a></li>
+                    <li><a href="@Url.Action("Curso", "Aluno")">Cursos</a></li>
                     <li><a href="#">Grade Curricular</a></li>
                     <li><a href="#">Notas</a></li>
                     <li><a href="#" style="color: red;">Tarefas</a></li>
@@ -151,13 +68,4 @@
         </ul>
     </nav>
 </body>
-
-
-
-
-
-
-
-
-
 </html>

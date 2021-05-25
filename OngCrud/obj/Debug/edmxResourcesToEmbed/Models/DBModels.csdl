@@ -6,12 +6,22 @@
     </Key>
     <Property Name="FuncID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Cargo" Type="String" />
+    <Property Name="Cargo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Sede" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Idade" Type="Int32" />
     <Property Name="Salario" Type="Int32" />
   </EntityType>
   <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Funcionarios" EntityType="Self.Funcionario" />
+    <EntitySet Name="Cursos" EntityType="AdoModel.Curso" />
   </EntityContainer>
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="CursoId" />
+    </Key>
+    <Property Name="CursoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeCurso" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Professor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

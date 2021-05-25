@@ -1,0 +1,55 @@
+﻿<h2>Agenda</h2>
+<table id="FuncTable" class="ui celled table" style="width:100%">
+    <thead>
+        <tr>
+            <th>Segunda</th>
+            <th>Terça-Feira</th>
+            <th>Quarta-Feira</th>
+            <th>Quinta-Feira</th>
+            <th>Sexta-Feira</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+        </tr>
+    </thead>
+</table>
+<a class="btn btn-default" style="align-items:center" href="@Url.Action("Inicio", "Home")"><i class="fas fa-arrow-left"></i> Voltar</a>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.semanticui.min.css" rel="stylesheet" />
+
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.semanticui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-replace-svg="nest"></script>
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () { // Função ajax pra popular a tabela quando a página abrir
+            dataTable = $("#FuncTable").DataTable({
+                "ajax": {
+                    "url": "/Aluno/CursoDados",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "NomeCurso" },
+                    { "data": "Professor" },
+                    { "data": "Status" },
+                    {
+                        "data": "CursoId",
+                        "visible": false,
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "165px"
+                    }
+                ],
+                "language": {
+                    "emptyTable": "Não há dados disponíveis."
+                }
+            });
+        });
+    </script>
+}

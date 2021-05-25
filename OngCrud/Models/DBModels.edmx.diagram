@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="bfc1fab174084fc792ad8ffa679960f7" Name="Diagram1">
         <EntityTypeShape EntityType="AdoModel.Funcionario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdoModel.Curso" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
