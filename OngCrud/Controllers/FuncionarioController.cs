@@ -16,8 +16,10 @@ namespace OngCrud.Controllers
             return View();
         }
 
-        public ActionResult GetData()
+        public ActionResult GetData() 
         {
+            /* Método que retorna os dados em tela pra gente, utiliza o model criado pelo Entity Framework,
+              assim convertemos os dados do model em um objeto do tipo lista, e retornamos em formato de Json*/
             using (DBModel db = new DBModel())
             {
                 List<Funcionario> funcList = db.Funcionarios.ToList<Funcionario>();
@@ -28,7 +30,8 @@ namespace OngCrud.Controllers
         [HttpGet]
         public ActionResult AddOrEdit(int id = 0)
         {
-            if(id==0)
+            
+            if (id==0)
             return View(new Funcionario());
             else
             {
@@ -42,6 +45,7 @@ namespace OngCrud.Controllers
         [HttpPost]
         public ActionResult AddOrEdit(Funcionario fnc)
         {
+            /* Método que permite que adicionemos ou editemos dados */
             using (DBModel db = new DBModel())
             {
                 if(fnc.FuncID == 0)

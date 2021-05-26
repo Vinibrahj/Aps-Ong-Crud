@@ -49,6 +49,7 @@
     padding: 14px 20px;
     align-items: center;
     flex-direction: column;
+    text-decoration: none;
 }
 
 .dp-menu ul li a:hover {
@@ -72,4 +73,13 @@
 
 .dp-menu ul ul li a {
     display: block;
+}
+
+nav .logo {
+    float: left;
+    color: white;
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 70px;
+    padding-left: 60px;
 }

@@ -3,7 +3,7 @@
     ViewBag.Title = "Cadastro de Funcionário";
 }
 
-<h2>Cadastro Teste</h2>
+<h2>Cadastro de funcionário</h2>
 
 <a class="btn btn-success" style="margin-bottom:10px" onclick="PopUpForm('@Url.Action("AddOrEdit", "Funcionario")')"><i class="fas fa-plus"></i> Add New</a>
 <table id="FuncTable" class="table table-striped table-bordered" style="width:100%">
@@ -18,7 +18,7 @@
         </tr>
     </thead>
 </table>
-<a class="btn btn-default" style="align-items:center" onclick=""></a>
+<a class="btn btn-default" style="align-items:center" href="@Url.Action("Inicio", "Home")"><i class="fas fa-arrow-left"></i> Voltar</a>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css" rel="stylesheet" />
@@ -58,7 +58,7 @@
             });
         });
         function PopUpForm(url) {
-            var formDiv = $('<div/>');
+            var formDiv = $('<div/>'); // Função que explode o PopUp de cadastro de funcionário 
             $.get(url)
                 .done(function (response) {
                     formDiv.html(response);
@@ -74,7 +74,7 @@
                     });
                 });
         }
-        function SubmitForm(form) {
+        function SubmitForm(form) { // Função que valida se o formulário da view AddOrEdit está válido e realiza uma requisição POST pra envio dos dados
             $.validator.unobtrusive.parse(form);
             if ($(form).valid()) {
                 $.ajax({
@@ -98,7 +98,7 @@
             return false;
         }
 
-        function Delete(id) {
+        function Delete(id) { // Essa função deleta o registro a partir do id selecionado
             if (confirm('Tem certe que quer deletar o registro?')) {
                 $.ajax({
                     type: "POST",

@@ -9,7 +9,7 @@ namespace OngCrud.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Inicio()
+        public ActionResult Inicio() // View Inicial
         {
             return View();
         }

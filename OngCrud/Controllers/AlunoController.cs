@@ -18,6 +18,7 @@ namespace OngCrud.Controllers
         
         public ActionResult CursoDados()
         {
+            // Retorna os dados da tabela Cursos, a partir do model criado pelo Entity Framework
             using (DBModel db = new DBModel())
             {
                 List<Curso> funcList = db.Cursos.ToList<Curso>();
